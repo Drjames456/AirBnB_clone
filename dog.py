@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""this module defines a class of dog"""
+"""this module defines a class of Dog"""
 
 
 class Dog:

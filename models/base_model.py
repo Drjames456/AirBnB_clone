@@ -6,6 +6,7 @@ defines all common attributes/methods for other classes
 import uuid
 from datetime import datetime
 
+
 class BaseModel:
     """
     A class called BaseModel that defines all common
@@ -27,4 +28,3 @@ class BaseModel:
         self.updated_at = self.updated_at.isoformat()
         self.__dict__["__class__"] = self.__class__.__name__
         return self.__dict__
-

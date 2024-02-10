@@ -4,6 +4,7 @@
 
 def Student_data():
     """define a funtion that check the age of student"""
+
     name = input("Please enter valid name: ")
     lastname = input('please enter first  name: ')
     username = name[:3] + lastname[3:]

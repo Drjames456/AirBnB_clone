@@ -12,8 +12,18 @@ class BaseModel:
     A class called BaseModel that defines all common
     attributes/methods for other classes
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """A constructor for the instance of the class"""
+        if kwarga != {}:
+            for key, value in kwargs.items():
+                if key == '__class__':
+                    pass
+                elif key == 'created_at':
+                    self.key = datetime.fromisoformat(value)
+                elif key == 'updated_at':
+                    self.key = datetime.fromisoformat(value)
+                else:
+                    self.key = value
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()

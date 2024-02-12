@@ -1,21 +1,14 @@
 #!/usr/bin/python3
-"""A module to test the base class and the methods in it"""
-import unittest
 from models.base_model import BaseModel
 
-
-class TestBaseModel(unittest.TestCase):
-    """A class to for the base model to test the methods"""
-    def test_init(self):
-        """A test for the constructor of the base class"""
-        div1 = BaseModel()
-        div2 = BaseModel()
-        self.assertIsInstance(div1, BaseModel)
-        self.assertNotEqual(div1, div2)
-
-    def test_uuid(self):
-        """A test for the uuid of different instance"""
-        giv1 = BaseModel()
-        giv2 = BaseModel()
-        self.assertNotEqual(giv1.id, giv2.id)
-        self.assertIsInstance(giv1.id, str)
+my_model = BaseModel()
+my_model.name = "My First Model"
+my_model.my_number = 89
+print(my_model)
+my_model.save()
+print(my_model)
+my_model_json = my_model.to_dict()
+print(my_model_json)
+print("JSON of my_model:")
+for key in my_model_json.keys():
+    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))

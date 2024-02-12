@@ -14,14 +14,18 @@ class BaseModel:
     """
     def __init__(self, *args, **kwargs):
         """A constructor for the instance of the class"""
+<<<<<<< HEAD
         if kwargs:
+=======
+        if kwargs != {}:
+>>>>>>> 6be4e10751b93616063f9cc601c602b10fd59cd5
             for key, value in kwargs.items():
                 if key == '__class__':
                     pass
                 elif key == 'created_at':
-                    self.key = datetime.fromisoformat(value)
+                    self.key = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
                 elif key == 'updated_at':
-                    self.key = datetime.fromisoformat(value)
+                    self.key = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
                 else:
                     self.key = value
         self.id = str(uuid.uuid4())

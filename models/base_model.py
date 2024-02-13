@@ -5,6 +5,7 @@ defines all common attributes/methods for other classes
 """
 import uuid
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -17,17 +18,16 @@ class BaseModel:
 
         if kwargs:
             for key, value in kwargs.items():
-                if key == '__class__':
-                    pass
-                elif key == 'created_at':
-                    self.key = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                elif key == 'updated_at':
-                    self.key = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                else:
-                    self.key = value
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+                if key != '__class__':
+                    if key in ['created_at', 'updated_at']:
+                        setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                    else:
+                        setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """A method that returns a string representation of an object"""
@@ -36,10 +36,13 @@ class BaseModel:
     def save(self):
         """A method that updates the instance time of creation"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """A method that create an instance dictionary"""
-        self.created_at = self.created_at.isoformat()
-        self.updated_at = self.updated_at.isoformat()
-        self.__dict__["__class__"] = self.__class__.__name__
-        return self.__dict__
+        obj_dict = self.__dict__.copy()
+        obj_dict['__class__'] = self.__class__.__name__
+        obj_dict['created_at'] = self.created_at.isoformat()
+        obj_dict['updated_at'] = self.updated_at.isoformat()
+        return obj_dict
+

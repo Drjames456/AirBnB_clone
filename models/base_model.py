@@ -20,7 +20,8 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key != '__class__':
                     if key in ['created_at', 'updated_at']:
-                        setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                        a = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                        setattr(self, key, a)
                     else:
                         setattr(self, key, value)
         else:
@@ -45,4 +46,3 @@ class BaseModel:
         obj_dict['created_at'] = self.created_at.isoformat()
         obj_dict['updated_at'] = self.updated_at.isoformat()
         return obj_dict
-

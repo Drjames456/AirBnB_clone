@@ -1,0 +1,1 @@
+Web static: During this project, i learned how to manipulate HTML and CSS languages. HTML is the structure of a page, it should be the first thing to write. CSS is the styling of a page, the design, and with both languages implemented together, i used it to design the front-end of my web application (Airbnb)
